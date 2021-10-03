@@ -17,48 +17,48 @@ void init_screen() {
 	noecho();
 	curs_set(0);
 	start_color();
-    	init_pair(1, COLOR_RED, COLOR_YELLOW); // highlight meniu
-    	init_pair(2, COLOR_BLACK, COLOR_YELLOW); // highlight cursor
-    	init_pair(3, COLOR_WHITE, COLOR_BLACK); // meniu si spatii ratate
-    	init_pair(4, COLOR_BLACK, COLOR_GREEN); // navele jucatorului
-    	init_pair(5, COLOR_BLACK, COLOR_CYAN); // harta computer
-		init_pair(6, COLOR_BLACK, COLOR_BLUE); // harta jucator
-		init_pair(7, COLOR_BLACK, COLOR_RED); // spatiu lovit
-		init_pair(8, COLOR_BLACK, COLOR_WHITE); // bckgd joc
-		init_pair(9, COLOR_RED, COLOR_WHITE); //highlight scor final
+	init_pair(1, COLOR_RED, COLOR_YELLOW); // highlight meniu
+	init_pair(2, COLOR_BLACK, COLOR_YELLOW); // highlight cursor
+	init_pair(3, COLOR_WHITE, COLOR_BLACK); // meniu si spatii ratate
+	init_pair(4, COLOR_BLACK, COLOR_GREEN); // navele jucatorului
+	init_pair(5, COLOR_BLACK, COLOR_CYAN); // harta computer
+	init_pair(6, COLOR_BLACK, COLOR_BLUE); // harta jucator
+	init_pair(7, COLOR_BLACK, COLOR_RED); // spatiu lovit
+	init_pair(8, COLOR_BLACK, COLOR_WHITE); // bckgd joc
+	init_pair(9, COLOR_RED, COLOR_WHITE); //highlight scor final
 }
 
 /*  functia care pastreaza in vectorul de matrici harti datele citite
 din fisierele date ca argumente */
 int citire_harti(char ****harti, int argc, char **argv) {
-    int i, j;
-    FILE **f; char s[24];
+	int i, j;
+	FILE **f; char s[24];
 
 /* alocam dinamic un vector de fisiere (nu este un numar standard)
 si un vector de matrici */
-    f = (FILE **) calloc(argc - 1, sizeof(FILE*));
-    (*harti) = (char ***) calloc(argc - 1, sizeof(char **));
+	f = (FILE **) calloc(argc - 1, sizeof(FILE*));
+	(*harti) = (char ***) calloc(argc - 1, sizeof(char **));
 
 // deschidem pe rand fisierele si copiem continutul lor in cate o matrice
-    for (i = 0; i < argc - 1; i++) {
-    	f[i] = fopen(argv[i + 1], "r");
-    // daca nu putem deschide un fisier afisam mesajul de eroare si iesim
-    	if (f[i] == NULL) {
-    		printf("Fisierul %s nu poate fi deschis", argv[i + 1]);
-    		return 0;
-    	}
-    // alocam memoria pentru fiecare matrice si o citim linie cu linie
-    	(*harti)[i] = (char **) calloc(10, sizeof(char *));
-    	for(j = 0; j < 10; j++) {
-    		fgets(s, 23, f[i]);
-    		(*harti)[i][j] = (char *) calloc(24, sizeof(char));
-    		strcpy((*harti)[i][j], s);
-    	}
-    	fclose(f[i]);
-    }
-    // eliberam memoria alocata vectorului de fisiere
-    free(f); 
-    return 1;
+	for (i = 0; i < argc - 1; i++) {
+		f[i] = fopen(argv[i + 1], "r");
+	// daca nu putem deschide un fisier afisam mesajul de eroare si iesim
+		if (f[i] == NULL) {
+			printf("Fisierul %s nu poate fi deschis", argv[i + 1]);
+			return 0;
+		}
+	// alocam memoria pentru fiecare matrice si o citim linie cu linie
+		(*harti)[i] = (char **) calloc(10, sizeof(char *));
+		for(j = 0; j < 10; j++) {
+			fgets(s, 23, f[i]);
+			(*harti)[i][j] = (char *) calloc(24, sizeof(char));
+			strcpy((*harti)[i][j], s);
+		}
+		fclose(f[i]);
+	}
+	// eliberam memoria alocata vectorului de fisiere
+	free(f); 
+	return 1;
 }
 
 //functia care intializeaza meniul jocului

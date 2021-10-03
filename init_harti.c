@@ -21,7 +21,7 @@ cu care va fi usor de lucrat in cod */
 		for (j = 0; j < 10; j++) {
 			if (harti[sel][i][2 * j + 1] == ' ')
 			harta_om[i][j] = '0';
-		    else harta_om[i][j] = 'x';
+			else harta_om[i][j] = 'x';
 		}
 	}
 }
@@ -128,7 +128,7 @@ void gen_harta(char harta_comp[10][10]) {
 				  ok = 1;
 				  break;
 			   }
-	    	}
+			}
 		} while (!ok);
 	/* dupa ce am gasit o casuta si un sens de pozitionare potrivit, 
 	modificam valorile din harta */
@@ -228,14 +228,14 @@ repozitiona la randomizare */
 				k2++;
 				if (k2 == 10) break; // ne asiguram ca nu iesim din matrice
 			}
-		    break;
+			break;
 		case 1:
 			while (harta[k1][k2] == 'x' || harta[k1][k2] == 'h') {
 				if (harta[k1][k2] == 'x') {
 					*nr = *nr + 1;
 				}
 				harta[k1][k2] = '0';
-			    k1++;
+				k1++;
 				if(k1 == 10) break;
 			 }
 			 break;
@@ -262,14 +262,14 @@ void randomize_map(char harta[10][10], WINDOW **game_window) {
 				if (j < 9) {
 				// conditia pentru a gasi sensul de parcurs al navei
 				 if (harta[i][j + 1] == 'x' || harta[i][j + 1] == 'h') {
-				    parcurge_nava(harta, i, j, 0, &v[k]);
-				    cont = 0;
+					parcurge_nava(harta, i, j, 0, &v[k]);
+					cont = 0;
 				 }
 				}
 				if (i < 9 && cont) {
-			    if (harta[i + 1][j] == 'x' || harta[i + 1][j] == 'h') {
-				    parcurge_nava(harta, i, j, 1, &v[k]);
-				    cont = 0;
+				if (harta[i + 1][j] == 'x' || harta[i + 1][j] == 'h') {
+					parcurge_nava(harta, i, j, 1, &v[k]);
+					cont = 0;
 				 }
 				}
 				if (cont) v[k] = 1; // cazul in care nava are un singur camp
@@ -297,7 +297,7 @@ cu care am generat harta computer-ului */
 				  ok = 1;
 				  break;
 			   }
-	    	}
+			}
 		} while (!ok);
 		switch (sens) {
 			case 0:
@@ -345,7 +345,7 @@ int nave_doborate(char harta[10][10]) {
 				 }
 				}
 				if (i < 9 && cont) {
-			    if (harta[i + 1][j] == 'x') {
+				if (harta[i + 1][j] == 'x') {
 				 parcurge_nava(harta, i, j, 1, &aux);
 				 }
 				}

@@ -18,9 +18,9 @@ int ver2(char v[10]){
 	for(i = 0; i < 10; i++){ 
 	  if(v[i] == 'h' || v[i] == 'm')
 	  	nr++;
-    }
+	}
 
-    if(nr == 10) return 1; else return 0;
+	if(nr == 10) return 1; else return 0;
 }
 
 /* functia care initializeaza pozitia cursorului, plasandu-l in campul cel mai 
@@ -32,7 +32,7 @@ void init_cursor(int *y, int *x, char harta_comp[10][10], WINDOW *grid_comp[10][
 	  	*x = *x + 1; 
 	  }
 	  wbkgd(grid_comp[*y][*x], COLOR_PAIR(2));
-      wrefresh(grid_comp[*y][*x]);
+	  wrefresh(grid_comp[*y][*x]);
 }
 
 /* functia care implementeaza deplasarea cursorului galben pe grid,
@@ -55,7 +55,7 @@ void deplasare(int c, int *y, int *x, int *schimb, char harta_comp[10][10]){
 			  		else contor++;
 			  	}
 			}
-		    else if(c == KEY_DOWN){
+			else if(c == KEY_DOWN){
 				contor = 1;
 			  	while(contor <= 9 && (*y + contor) < 10){
 			  		if(ver(harta_comp, *y + contor, *x)){
@@ -65,7 +65,7 @@ void deplasare(int c, int *y, int *x, int *schimb, char harta_comp[10][10]){
 			  		}
 			  		else contor++;
 			  	}
-		    }
+			}
 		 	else if(c == KEY_RIGHT){
 			 	contor = 1;
 			  	while(contor <= 9 && (*x + contor) < 10){
@@ -77,7 +77,7 @@ void deplasare(int c, int *y, int *x, int *schimb, char harta_comp[10][10]){
 			  		else contor++;
 			  	}
 		 	}
-		    else if(c == KEY_LEFT){ 
+			else if(c == KEY_LEFT){ 
 			 	contor = 1;
 			  	while(contor <= 9 && (*x - contor) >= 0){
 			  		if(ver(harta_comp, *y, *x - contor)){
@@ -100,8 +100,10 @@ void move_cursor(int anty, int antx, int y, int x, char harta_comp[10][10],
 		  			if(harta_comp[anty][antx] == 'm'){
 		  				wbkgd(grid_comp[anty][antx], COLOR_PAIR(3));
 		  			}
-		  	 		else wbkgd(grid_comp[anty][antx], COLOR_PAIR(5));
-		  		}
+		  	 		else {
+						wbkgd(grid_comp[anty][antx], COLOR_PAIR(5));
+		  			}
+				}
 		  		wrefresh(grid_comp[y][x]);
 		  		wrefresh(grid_comp[anty][antx]);
 }
@@ -125,13 +127,13 @@ void atac(char harta[10][10], WINDOW *grid[10][10], int y, int x, int *cont,
 				*finish = 1; 
 				*cont = 0;
 			}
-	    }
-	    else {
+		}
+		else {
 	  		harta[y][x] = 'm';
 	  		wbkgd(grid[y][x], COLOR_PAIR(3));
 			wrefresh(grid[y][x]);
 			*cont = 0; //retinem ca am ratat pentru a trece la mutarea oponentului
-	    }	
+		}	
 }
 
 /* functia care ataca aleatoriu un camp din grid-ul dat ca parametru;
@@ -174,13 +176,13 @@ void atac_hard(char harta[10][10], WINDOW *grid[10][10], int y, int x, int *cont
 				*cont = 0;
 			}
 			*nava_gasita = *nava_gasita + 1;
-	    }
-	    else  {
+		}
+		else  {
 	  		harta[y][x] = 'm';
 	  		wbkgd(grid[y][x], COLOR_PAIR(3));
 			wrefresh(grid[y][x]);
 			*cont = 0;
-	    }	
+		}	
 }
 
 /* functie utilizata la varianta dificila a jocului, similara cu 
